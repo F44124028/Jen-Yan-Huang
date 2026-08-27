@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  使用說明（這段註解不會顯示在網站上）
+  這是一個「範本」，所有標示 [ ] 的地方請換成真實資料：
+    1. Hero 區：姓名、一句話定位、3 個關鍵字標籤
+    2. 關於／專長區：簡介文字、專長清單
+    3. 證照區：證照名稱、發證機構、年份
+    4. 教學經歷區：時間、機構名稱、課程主題（依時間排序）
+    5. 寫作經歷／出版品區：類型、標題、出處、年份
+    6. 聯絡區：Email、社群連結
+  搜尋 "EDIT:" 可以快速找到所有需要替換的地方。
+  ============================================================
+-->
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDIT: 母親姓名 — 芳香療法與身心保健講師</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EFE9D8;
+    --paper-alt: #E5DCC4;
+    --white-soft: #FAF7EF;
+    --forest: #333F2C;
+    --forest-deep: #202A1B;
+    --amber: #AD8138;
+    --amber-soft: #E1C48D;
+    --lavender: #8B7996;
+    --ink: #2A271F;
+    --sage: #9FAD8B;
+    --line: rgba(42,39,31,0.14);
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --max: 1120px;
+    --pad: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  .wrap{ max-width: var(--max); margin:0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--forest);
+    display:flex; align-items:center; gap:0.6em;
+  }
+  .eyebrow::before{
+    content:"";
+    width: 1.4em; height:1px;
+    background: var(--amber);
+    display:inline-block;
+  }
+  h1,h2,h3{ font-family: var(--font-display); font-weight:600; margin:0; color: var(--forest-deep); }
+  section{ padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
+  .section-head{ max-width: 640px; margin-bottom: clamp(2rem,5vw,3.2rem); }
+  .section-head h2{ font-size: clamp(1.7rem, 3vw, 2.4rem); margin-top:0.5rem; }
+  .section-head p{ margin-top:0.9rem; color: var(--forest); opacity:0.85; max-width: 52ch; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(239,233,216,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:4.2rem; }
+  .nav__mark{
+    font-family: var(--font-mono); font-size:0.85rem; letter-spacing:0.08em;
+    display:flex; align-items:center; gap:0.5em;
+  }
+  .nav__mark span{ width:7px; height:7px; border-radius:50%; background: var(--amber); display:inline-block; }
+  .nav__links{ display:flex; gap: clamp(1rem,2.5vw,2.2rem); list-style:none; margin:0; padding:0; font-size:0.9rem; }
+  .nav__links a{ text-decoration:none; padding: 0.3rem 0; border-bottom: 1px solid transparent; transition: border-color .2s ease, color .2s ease; }
+  .nav__links a:hover{ border-color: var(--amber); color: var(--forest-deep); }
+  .nav__toggle{ display:none; background:none; border:none; cursor:pointer; padding:0.4rem; }
+  .nav__toggle span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; }
+
+  @media (max-width: 760px){
+    .nav__links{
+      position: fixed; inset: 4.2rem 0 0 0; background: var(--paper);
+      flex-direction:column; padding: 2rem var(--pad); gap:1.4rem; font-size:1.1rem;
+      transform: translateY(-110%); transition: transform .35s ease;
+    }
+    .nav__links.open{ transform: translateY(0); }
+    .nav__toggle{ display:block; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{ padding-top: clamp(3rem,7vw,5rem); }
+  .hero .wrap{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem,5vw,4rem); align-items:center; }
+  .hero__tagline{ font-family: var(--font-mono); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); }
+  .hero h1{ font-size: clamp(2.6rem, 6vw, 4.3rem); line-height:1.08; margin-top:0.5rem; }
+  .hero h1 em{ font-style: italic; color: var(--amber); font-weight:500; }
+  .hero__lede{ margin-top:1.4rem; font-size:1.08rem; max-width: 46ch; color: var(--forest-deep); }
+  .hero__tags{ display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1.8rem; }
+  .tag{
+    font-family: var(--font-mono); font-size:0.72rem; letter-spacing:0.08em;
+    border:1px solid var(--forest); border-radius: 999px; padding:0.4rem 0.85rem;
+    color: var(--forest-deep);
+  }
+  .hero__cta{ margin-top:2.2rem; display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn{
+    font-family: var(--font-mono); font-size:0.82rem; letter-spacing:0.05em;
+    padding:0.85rem 1.5rem; border-radius:2px; text-decoration:none;
+    display:inline-block; transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn--solid{ background: var(--forest-deep); color: var(--white-soft); }
+  .btn--solid:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(32,42,27,0.25); }
+  .btn--ghost{ border:1px solid var(--forest-deep); color: var(--forest-deep); }
+  .btn--ghost:hover{ background: var(--forest-deep); color: var(--white-soft); }
+
+  .hero__art{ position:relative; }
+  .hero__art svg{ width:100%; height:auto; }
+
+  /* ---------- about ---------- */
+  .about .wrap{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem,5vw,4rem); align-items:start; }
+  .about__portrait{
+    aspect-ratio: 4/5; background: var(--paper-alt);
+    border:1px solid var(--line); position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about__portrait span{ font-family: var(--font-mono); font-size:0.7rem; color: var(--forest); text-align:center; padding:1rem; letter-spacing:0.06em; }
+  .about__quote{ margin-top:1.2rem; font-family: var(--font-display); font-style:italic; font-size:1.05rem; color: var(--forest-deep); border-left:2px solid var(--amber); padding-left:1rem; }
+  .about__intro p{ font-size:1.02rem; color: var(--forest-deep); }
+  .compound-list{ list-style:none; margin:2rem 0 0; padding:0; display:grid; gap:0; border-top:1px solid var(--line); }
+  .compound-list li{
+    display:grid; grid-template-columns: 8.5rem 1fr; gap:1.2rem;
+    padding: 1.1rem 0; border-bottom:1px solid var(--line);
+  }
+  .compound-list .label{ font-family: var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--amber); padding-top:0.15rem; }
+  .compound-list .desc{ color: var(--forest-deep); }
+  .compound-list .desc strong{ font-family: var(--font-display); font-weight:500; font-size:1.05rem; display:block; margin-bottom:0.2rem; }
+
+  /* ---------- credentials ---------- */
+  .cred-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap:1.2rem; }
+  .cred-card{
+    background: var(--white-soft); border:1px solid var(--line);
+    padding:1.6rem; position:relative;
+  }
+  .cred-card::before{
+    content:"◆"; color: var(--amber); font-size:0.7rem; position:absolute; top:1.4rem; right:1.4rem;
+  }
+  .cred-card .yr{ font-family: var(--font-mono); font-size:0.72rem; color: var(--forest); letter-spacing:0.08em; }
+  .cred-card h3{ font-size:1.15rem; margin-top:0.6rem; line-height:1.35; }
+  .cred-card p{ margin:0.6rem 0 0; font-size:0.9rem; color: var(--forest); opacity:0.85; }
+
+  /* ---------- teaching timeline ---------- */
+  .timeline{ position:relative; padding-left: 2.6rem; }
+  .timeline::before{
+    content:""; position:absolute; left:7px; top:6px; bottom:6px; width:1px;
+    background: linear-gradient(to bottom, var(--sage), var(--line));
+  }
+  .t-item{ position:relative; padding-bottom: 2.6rem; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-leaf{ position:absolute; left:-2.6rem; top:0.15rem; width:15px; height:15px; }
+  .t-item .date{ font-family: var(--font-mono); font-size:0.75rem; letter-spacing:0.08em; color: var(--amber); }
+  .t-item h3{ font-size:1.3rem; margin-top:0.35rem; }
+  .t-item .topic{ margin-top:0.35rem; color: var(--forest-deep); font-size:0.98rem; }
+  .t-item .org{ font-family: var(--font-mono); font-size:0.78rem; color: var(--forest); margin-top:0.2rem; }
+
+  /* ---------- writing ---------- */
+  .write-list{ display:grid; gap:0; border-top:1px solid var(--line); }
+  .write-item{
+    display:grid; grid-template-columns: 6.5rem 1fr auto; gap:1.5rem; align-items:baseline;
+    padding:1.5rem 0; border-bottom:1px solid var(--line);
+  }
+  .write-item .type{ font-family: var(--font-mono); font-size:0.7rem; letter-spacing:0.08em; color: var(--lavender); text-transform:uppercase; }
+  .write-item h3{ font-family: var(--font-display); font-style:italic; font-weight:500; font-size:1.15rem; }
+  .write-item .meta{ font-family: var(--font-mono); font-size:0.78rem; color: var(--forest); white-space:nowrap; }
+  @media (max-width:640px){
+    .write-item{ grid-template-columns: 1fr; gap:0.4rem; }
+  }
+
+  /* ---------- contact ---------- */
+  .contact{ background: var(--forest-deep); color: var(--white-soft); }
+  .contact .eyebrow{ color: var(--amber-soft); }
+  .contact .eyebrow::before{ background: var(--amber-soft); }
+  .contact h2{ color: var(--white-soft); }
+  .contact .wrap{ display:flex; flex-direction:column; align-items:flex-start; gap:1.6rem; }
+  .contact p{ max-width:46ch; opacity:0.85; }
+  .contact__row{ display:flex; flex-wrap:wrap; gap:1rem; }
+  .contact .btn--solid{ background: var(--amber); color: var(--forest-deep); }
+  .contact .btn--ghost{ border-color: var(--white-soft); color: var(--white-soft); }
+  .contact .btn--ghost:hover{ background: var(--white-soft); color: var(--forest-deep); }
+
+  footer{ padding: 2rem 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; font-family: var(--font-mono); font-size:0.72rem; color: var(--forest); flex-wrap:wrap; gap:0.6rem; }
+
+  @media (max-width: 860px){
+    .hero .wrap, .about .wrap{ grid-template-columns: 1fr; }
+    .hero__art{ order:-1; max-width:280px; margin:0 auto; }
+    .compound-list li{ grid-template-columns: 1fr; gap:0.3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .btn, .nav__links{ transition:none; }
+  }
+
+  .reveal{ opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="leaf-node" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5.5" fill="var(--paper)" stroke="var(--amber)" stroke-width="1.4"/>
+  </symbol>
+</svg>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav__mark"><span></span>EDIT: 母親姓名</div>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#about">關於</a></li>
+      <li><a href="#credentials">專長證照</a></li>
+      <li><a href="#teaching">教學經歷</a></li>
+      <li><a href="#writing">寫作出版</a></li>
+      <li><a href="#contact">聯絡方式</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="開啟選單"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero__tagline">EDIT: 芳香療法 · 身心保健 · 講師</div>
+      <h1>EDIT: 姓名<br><em>用氣味，說一堂關於照顧自己的課</em></h1>
+      <p class="hero__lede">EDIT：一句話講清楚妳母親是誰、做什麼、為誰服務。例如：「十年臨床芳療經驗，專注於壓力調節與睡眠保健，目前於多所機構開設芳療應用課程。」</p>
+      <div class="hero__tags">
+        <span class="tag">EDIT: NAHA 認證芳療師</span>
+        <span class="tag">EDIT: 芳療講師 10 年</span>
+        <span class="tag">EDIT: 出版作者</span>
+      </div>
+      <div class="hero__cta">
+        <a class="btn btn--solid" href="#teaching">查看教學經歷</a>
+        <a class="btn btn--ghost" href="#contact">邀約合作</a>
+      </div>
+    </div>
+    <div class="hero__art">
+      <!-- 手繪風植物線稿，可自行替換為其他 SVG 或照片 -->
+      <svg viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M160 400 C160 300 155 200 165 60" stroke="var(--forest)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M165 340 C130 320 110 290 100 250" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
+        <path d="M165 340 C200 320 220 290 232 252" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
+        <path d="M162 260 C128 240 108 212 96 176" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
+        <path d="M162 260 C198 240 220 212 234 176" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
+        <g fill="var(--amber-soft)" opacity="0.9">
+          <ellipse cx="165" cy="150" rx="7" ry="12" transform="rotate(20 165 150)"/>
+          <ellipse cx="178" cy="130" rx="7" ry="12" transform="rotate(20 178 130)"/>
+          <ellipse cx="152" cy="128" rx="7" ry="12" transform="rotate(-15 152 128)"/>
+          <ellipse cx="170" cy="105" rx="7" ry="12" transform="rotate(15 170 105)"/>
+          <ellipse cx="155" cy="100" rx="7" ry="12" transform="rotate(-20 155 100)"/>
+          <ellipse cx="165" cy="78" rx="7" ry="12" transform="rotate(5 165 78)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about reveal">
+  <div class="wrap">
+    <div>
+      <div class="about__portrait"><span>EDIT: 放入母親照片<br>建議 4:5 直式、自然光、暖色調</span></div>
+      <p class="about__quote">EDIT：放一句最能代表她教學理念的話，例如「氣味先於語言抵達，芳療是身體最誠實的對話。」</p>
+    </div>
+    <div class="about__intro">
+      <div class="section-head" style="margin-bottom:1.6rem;">
+        <div class="eyebrow">關於我</div>
+        <h2>EDIT：一段兩到三句的自我介紹</h2>
+        <p>EDIT：介紹她的背景、轉入芳療／保健領域的契機，以及教學風格。可以參考她平常自我介紹時常說的一段話，稍加潤飾即可，不需要寫得太正式。</p>
+      </div>
+      <ul class="compound-list">
+        <li>
+          <span class="label">專長 01</span>
+          <span class="desc"><strong>EDIT: 專長領域名稱</strong>EDIT：一句說明這項專長解決什麼問題、適合什麼對象。</span>
+        </li>
+        <li>
+          <span class="label">專長 02</span>
+          <span class="desc"><strong>EDIT: 專長領域名稱</strong>EDIT：說明內容。</span>
+        </li>
+        <li>
+          <span class="label">專長 03</span>
+          <span class="desc"><strong>EDIT: 專長領域名稱</strong>EDIT：說明內容。</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="credentials" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">專長 · 證照</div>
+      <h2>受過的訓練，值得被看見</h2>
+      <p>列出正式證照與受訓機構，建立專業信任感。</p>
+    </div>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="yr">EDIT: 2019</div>
+        <h3>EDIT: 證照全名</h3>
+        <p>EDIT: 發證機構名稱</p>
+      </div>
+      <div class="cred-card">
+        <div class="yr">EDIT: 2021</div>
+        <h3>EDIT: 證照全名</h3>
+        <p>EDIT: 發證機構名稱</p>
+      </div>
+      <div class="cred-card">
+        <div class="yr">EDIT: 2023</div>
+        <h3>EDIT: 證照全名</h3>
+        <p>EDIT: 發證機構名稱</p>
+      </div>
+      <div class="cred-card">
+        <div class="yr">EDIT: 2024</div>
+        <h3>EDIT: 證照全名</h3>
+        <p>EDIT: 發證機構名稱</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teaching" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">教學經歷</div>
+      <h2>教過的機構與課程</h2>
+      <p>依時間先後排列，讓對方快速掌握合作經驗的深度與廣度。</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <svg class="t-leaf"><use href="#leaf-node"/></svg>
+        <div class="date">EDIT: 2024.03 – 2024.06</div>
+        <h3>EDIT: 課程主題</h3>
+        <div class="org">EDIT: 機構名稱</div>
+        <p class="topic">EDIT：一到兩句說明課程內容、對象與人數規模。</p>
+      </div>
+      <div class="t-item">
+        <svg class="t-leaf"><use href="#leaf-node"/></svg>
+        <div class="date">EDIT: 2023.09 – 2023.12</div>
+        <h3>EDIT: 課程主題</h3>
+        <div class="org">EDIT: 機構名稱</div>
+        <p class="topic">EDIT：說明內容。</p>
+      </div>
+      <div class="t-item">
+        <svg class="t-leaf"><use href="#leaf-node"/></svg>
+        <div class="date">EDIT: 2022.05</div>
+        <h3>EDIT: 課程主題</h3>
+        <div class="org">EDIT: 機構名稱</div>
+        <p class="topic">EDIT：說明內容。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="writing" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">寫作經歷 · 出版品</div>
+      <h2>文字裡的專業</h2>
+      <p>專欄、書籍、受訪或投稿紀錄，展現持續累積的內容深度。</p>
+    </div>
+    <div class="write-list">
+      <div class="write-item">
+        <span class="type">EDIT: 專欄</span>
+        <h3>EDIT: 文章／單元標題</h3>
+        <span class="meta">EDIT: 刊物名稱 · 2024</span>
+      </div>
+      <div class="write-item">
+        <span class="type">EDIT: 書籍</span>
+        <h3>EDIT: 書名</h3>
+        <span class="meta">EDIT: 出版社 · 2023</span>
+      </div>
+      <div class="write-item">
+        <span class="type">EDIT: 受訪</span>
+        <h3>EDIT: 報導／節目名稱</h3>
+        <span class="meta">EDIT: 媒體名稱 · 2022</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact reveal">
+  <div class="wrap">
+    <div class="eyebrow">聯絡方式</div>
+    <h2>邀約授課或合作</h2>
+    <p>EDIT：一句歡迎聯繫的話，說明她目前接受的合作類型，例如企業講座、社區課程、出版邀稿等。</p>
+    <div class="contact__row">
+      <a class="btn btn--solid" href="mailto:EDIT@email.com">EDIT@email.com</a>
+      <a class="btn btn--ghost" href="#">EDIT: Instagram / Facebook</a>
+      <a class="btn btn--ghost" href="#">EDIT: Line 官方帳號</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> EDIT: 母親姓名</span>
+    <span>芳香療法 · 身心保健</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
