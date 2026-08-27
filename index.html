@@ -46,9 +46,15 @@
   html{ scroll-behavior: smooth; }
   body{
     margin:0;
-    background:
-      radial-gradient(circle at 3px 3px, rgba(91,122,74,0.06) 1.4px, transparent 1.6px) 0 0/26px 26px,
-      var(--paper);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(600px circle at 92% -5%, rgba(91,122,74,0.11), transparent 60%),
+      radial-gradient(700px circle at -8% 38%, rgba(150,168,126,0.13), transparent 60%),
+      radial-gradient(650px circle at 100% 88%, rgba(79,107,92,0.10), transparent 60%),
+      radial-gradient(circle at 3px 3px, rgba(91,122,74,0.06) 1.4px, transparent 1.6px);
+    background-size: auto, auto, auto, 26px 26px;
+    background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+    background-attachment: fixed, fixed, fixed, local;
     color: var(--ink);
     font-family: var(--font-body);
     font-weight: 400;
@@ -133,7 +139,7 @@
   .btn--ghost:hover{ background: var(--forest-deep); color: var(--white-soft); }
 
   .hero__art{ position:relative; }
-  .hero__art svg{ width:100%; height:auto; }
+  .hero__art svg{ width:100%; height:auto; overflow:visible; }
 
   /* ---------- about ---------- */
   .about .wrap{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem,5vw,4rem); align-items:start; }
@@ -160,11 +166,7 @@
     background: var(--white-soft); border:1px solid var(--line);
     padding:1.6rem; position:relative;
   }
-  .cred-card::before{
-    content:""; position:absolute; top:1.5rem; right:1.5rem;
-    width:12px; height:16px; background: var(--moss-soft);
-    clip-path: path('M6 0C6 0 12 5 12 10C12 13.3 9.3 16 6 16C2.7 16 0 13.3 0 10C0 5 6 0 6 0Z');
-  }
+  .cred-mark{ position:absolute; top:1.1rem; right:1.1rem; width:24px; height:24px; color: var(--moss); }
   .cred-card .yr{ font-family: var(--font-mono); font-size:0.72rem; color: var(--forest); letter-spacing:0.08em; }
   .cred-card h3{ font-size:1.15rem; margin-top:0.6rem; line-height:1.35; }
   .cred-card p{ margin:0.6rem 0 0; font-size:0.9rem; color: var(--forest); opacity:0.85; }
@@ -177,7 +179,7 @@
   }
   .t-item{ position:relative; padding-bottom: 2.6rem; }
   .t-item:last-child{ padding-bottom:0; }
-  .t-leaf{ position:absolute; left:-2.6rem; top:0.1rem; width:18px; height:18px; }
+  .t-leaf{ position:absolute; left:-2.7rem; top:0.05rem; width:20px; height:20px; color: var(--moss); }
   .t-item .date{ font-family: var(--font-mono); font-size:0.75rem; letter-spacing:0.08em; color: var(--moss); }
   .t-item h3{ font-size:1.3rem; margin-top:0.35rem; }
   .t-item .topic{ margin-top:0.35rem; color: var(--forest-deep); font-size:0.98rem; }
@@ -229,10 +231,23 @@
 <body>
 
 <svg width="0" height="0" style="position:absolute">
-  <symbol id="leaf-node" viewBox="0 0 24 24">
-    <path d="M12 2C6 6 4 12 12 22C20 12 18 6 12 2Z" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="1.3"/>
-    <path d="M12 6V19" stroke="var(--forest)" stroke-width="0.9" stroke-linecap="round"/>
-  </symbol>
+  <defs>
+    <filter id="wc-bleed" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wc-bloom" x="-80%" y="-80%" width="260%" height="260%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.6"/>
+    </filter>
+    <filter id="wc-wash" x="-100%" y="-100%" width="300%" height="300%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <symbol id="wc-leaf" viewBox="0 0 40 40">
+      <path d="M20 4C10 10 6 20 12 32C18 40 28 38 32 28C36 16 30 8 20 4Z" fill="currentColor" opacity="0.32" filter="url(#wc-bloom)"/>
+      <path d="M20 6C11 12 8 21 13 31C18 38 27 36 30 27C34 17 29 9 20 6Z" fill="currentColor" opacity="0.7" filter="url(#wc-bleed)"/>
+      <path d="M20 9C19 16 19 24 21 33" stroke="currentColor" stroke-width="0.9" opacity="0.45" fill="none"/>
+    </symbol>
+  </defs>
 </svg>
 
 <nav class="nav">
@@ -266,21 +281,22 @@
       </div>
     </div>
     <div class="hero__art">
-      <!-- 植物葉片線稿，可自行替換為其他 SVG 或照片 -->
-      <svg viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M160 404C160 300 156 200 164 40" stroke="var(--forest)" stroke-width="1.8" stroke-linecap="round"/>
-        <g>
-          <path d="M162 360C120 348 92 322 78 288C110 288 142 306 162 340Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
-          <path d="M162 360C204 348 232 322 246 288C214 288 182 306 162 340Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
-          <path d="M160 296C120 284 94 260 80 228C112 228 142 246 160 278Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1.1"/>
-          <path d="M160 296C200 284 226 260 240 228C208 228 178 246 160 278Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1.1"/>
-          <path d="M158 236C124 224 100 202 88 174C116 174 144 190 158 218Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
-          <path d="M158 236C192 224 216 202 228 174C200 174 172 190 158 218Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
-          <path d="M156 176C130 166 112 148 102 124C126 124 148 138 156 162Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1"/>
-          <path d="M156 176C182 166 200 148 210 124C186 124 164 138 156 162Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1"/>
-          <path d="M162 118C144 108 132 92 128 72C146 76 160 90 165 108Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1"/>
-          <path d="M162 118C180 108 192 92 196 72C178 76 164 90 159 108Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1"/>
-        </g>
+      <!-- 水彩暈染風格的植物枝葉，可自行替換為照片 -->
+      <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="205" cy="115" rx="95" ry="135" fill="var(--sage)" opacity="0.14" filter="url(#wc-wash)"/>
+        <ellipse cx="100" cy="305" rx="85" ry="115" fill="var(--moss)" opacity="0.11" filter="url(#wc-wash)"/>
+
+        <path d="M168 404C150 340 178 300 150 240C126 190 172 150 148 96C134 66 156 46 150 20"
+              stroke="var(--forest)" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.75"/>
+
+        <g transform="translate(150,370) rotate(-35) scale(1.35)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss)"/></g>
+        <g transform="translate(186,338) rotate(42) scale(-1.15,1.15)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--sage)"/></g>
+        <g transform="translate(126,296) rotate(-52) scale(1.2)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss-soft)"/></g>
+        <g transform="translate(179,251) rotate(36) scale(-1.05,1.05)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--fern)"/></g>
+        <g transform="translate(138,202) rotate(-40) scale(1.1)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--sage)"/></g>
+        <g transform="translate(173,158) rotate(30) scale(-0.95,0.95)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss)"/></g>
+        <g transform="translate(144,113) rotate(-46) scale(0.9)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss-soft)"/></g>
+        <g transform="translate(163,68) rotate(24) scale(-0.75,0.75)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--sage)"/></g>
       </svg>
     </div>
   </div>
@@ -325,21 +341,25 @@
     </div>
     <div class="cred-grid">
       <div class="cred-card">
+        <svg class="cred-mark" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="yr">EDIT: 2019</div>
         <h3>EDIT: 證照全名</h3>
         <p>EDIT: 發證機構名稱</p>
       </div>
       <div class="cred-card">
+        <svg class="cred-mark" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="yr">EDIT: 2021</div>
         <h3>EDIT: 證照全名</h3>
         <p>EDIT: 發證機構名稱</p>
       </div>
       <div class="cred-card">
+        <svg class="cred-mark" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="yr">EDIT: 2023</div>
         <h3>EDIT: 證照全名</h3>
         <p>EDIT: 發證機構名稱</p>
       </div>
       <div class="cred-card">
+        <svg class="cred-mark" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="yr">EDIT: 2024</div>
         <h3>EDIT: 證照全名</h3>
         <p>EDIT: 發證機構名稱</p>
@@ -357,21 +377,21 @@
     </div>
     <div class="timeline">
       <div class="t-item">
-        <svg class="t-leaf"><use href="#leaf-node"/></svg>
+        <svg class="t-leaf" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="date">EDIT: 2024.03 – 2024.06</div>
         <h3>EDIT: 課程主題</h3>
         <div class="org">EDIT: 機構名稱</div>
         <p class="topic">EDIT：一到兩句說明課程內容、對象與人數規模。</p>
       </div>
       <div class="t-item">
-        <svg class="t-leaf"><use href="#leaf-node"/></svg>
+        <svg class="t-leaf" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="date">EDIT: 2023.09 – 2023.12</div>
         <h3>EDIT: 課程主題</h3>
         <div class="org">EDIT: 機構名稱</div>
         <p class="topic">EDIT：說明內容。</p>
       </div>
       <div class="t-item">
-        <svg class="t-leaf"><use href="#leaf-node"/></svg>
+        <svg class="t-leaf" viewBox="0 0 40 40"><use href="#wc-leaf"/></svg>
         <div class="date">EDIT: 2022.05</div>
         <h3>EDIT: 課程主題</h3>
         <div class="org">EDIT: 機構名稱</div>
