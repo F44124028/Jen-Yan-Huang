@@ -22,17 +22,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper: #EFE9D8;
-    --paper-alt: #E5DCC4;
-    --white-soft: #FAF7EF;
-    --forest: #333F2C;
-    --forest-deep: #202A1B;
-    --amber: #AD8138;
-    --amber-soft: #E1C48D;
-    --lavender: #8B7996;
-    --ink: #2A271F;
-    --sage: #9FAD8B;
-    --line: rgba(42,39,31,0.14);
+    --paper: #EFF1E1;
+    --paper-alt: #E1E6CE;
+    --white-soft: #FAFBF3;
+    --forest: #2E3B26;
+    --forest-deep: #1B2416;
+    --moss: #5B7A4A;
+    --moss-soft: #A9C08C;
+    --fern: #4F6B5C;
+    --ink: #23261D;
+    --sage: #96A87E;
+    --line: rgba(35,38,29,0.14);
 
     --font-display: 'Fraunces', serif;
     --font-body: 'Work Sans', sans-serif;
@@ -46,7 +46,9 @@
   html{ scroll-behavior: smooth; }
   body{
     margin:0;
-    background: var(--paper);
+    background:
+      radial-gradient(circle at 3px 3px, rgba(91,122,74,0.06) 1.4px, transparent 1.6px) 0 0/26px 26px,
+      var(--paper);
     color: var(--ink);
     font-family: var(--font-body);
     font-weight: 400;
@@ -61,14 +63,15 @@
     font-size: 0.72rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--forest);
-    display:flex; align-items:center; gap:0.6em;
+    color: var(--moss);
+    display:flex; align-items:center; gap:0.5em;
   }
   .eyebrow::before{
-    content:"";
-    width: 1.4em; height:1px;
-    background: var(--amber);
-    display:inline-block;
+    content:"❧";
+    font-family: var(--font-display);
+    font-size: 1rem;
+    line-height:1;
+    color: var(--moss);
   }
   h1,h2,h3{ font-family: var(--font-display); font-weight:600; margin:0; color: var(--forest-deep); }
   section{ padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
@@ -79,7 +82,7 @@
   /* ---------- nav ---------- */
   .nav{
     position: sticky; top:0; z-index: 50;
-    background: rgba(239,233,216,0.86);
+    background: rgba(239,241,225,0.86);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
   }
@@ -88,10 +91,10 @@
     font-family: var(--font-mono); font-size:0.85rem; letter-spacing:0.08em;
     display:flex; align-items:center; gap:0.5em;
   }
-  .nav__mark span{ width:7px; height:7px; border-radius:50%; background: var(--amber); display:inline-block; }
+  .nav__mark span{ width:7px; height:7px; border-radius:50% 0 50% 50%; background: var(--moss); display:inline-block; transform: rotate(45deg); }
   .nav__links{ display:flex; gap: clamp(1rem,2.5vw,2.2rem); list-style:none; margin:0; padding:0; font-size:0.9rem; }
   .nav__links a{ text-decoration:none; padding: 0.3rem 0; border-bottom: 1px solid transparent; transition: border-color .2s ease, color .2s ease; }
-  .nav__links a:hover{ border-color: var(--amber); color: var(--forest-deep); }
+  .nav__links a:hover{ border-color: var(--moss); color: var(--forest-deep); }
   .nav__toggle{ display:none; background:none; border:none; cursor:pointer; padding:0.4rem; }
   .nav__toggle span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; }
 
@@ -106,11 +109,11 @@
   }
 
   /* ---------- hero ---------- */
-  .hero{ padding-top: clamp(3rem,7vw,5rem); }
+  .hero{ padding-top: clamp(3rem,7vw,5rem); position:relative; overflow:hidden; }
   .hero .wrap{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem,5vw,4rem); align-items:center; }
-  .hero__tagline{ font-family: var(--font-mono); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); }
+  .hero__tagline{ font-family: var(--font-mono); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss); }
   .hero h1{ font-size: clamp(2.6rem, 6vw, 4.3rem); line-height:1.08; margin-top:0.5rem; }
-  .hero h1 em{ font-style: italic; color: var(--amber); font-weight:500; }
+  .hero h1 em{ font-style: italic; color: var(--moss); font-weight:500; }
   .hero__lede{ margin-top:1.4rem; font-size:1.08rem; max-width: 46ch; color: var(--forest-deep); }
   .hero__tags{ display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:1.8rem; }
   .tag{
@@ -125,7 +128,7 @@
     display:inline-block; transition: transform .2s ease, box-shadow .2s ease;
   }
   .btn--solid{ background: var(--forest-deep); color: var(--white-soft); }
-  .btn--solid:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(32,42,27,0.25); }
+  .btn--solid:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(27,36,22,0.28); }
   .btn--ghost{ border:1px solid var(--forest-deep); color: var(--forest-deep); }
   .btn--ghost:hover{ background: var(--forest-deep); color: var(--white-soft); }
 
@@ -140,14 +143,14 @@
     display:flex; align-items:center; justify-content:center;
   }
   .about__portrait span{ font-family: var(--font-mono); font-size:0.7rem; color: var(--forest); text-align:center; padding:1rem; letter-spacing:0.06em; }
-  .about__quote{ margin-top:1.2rem; font-family: var(--font-display); font-style:italic; font-size:1.05rem; color: var(--forest-deep); border-left:2px solid var(--amber); padding-left:1rem; }
+  .about__quote{ margin-top:1.2rem; font-family: var(--font-display); font-style:italic; font-size:1.05rem; color: var(--forest-deep); border-left:2px solid var(--moss); padding-left:1rem; }
   .about__intro p{ font-size:1.02rem; color: var(--forest-deep); }
   .compound-list{ list-style:none; margin:2rem 0 0; padding:0; display:grid; gap:0; border-top:1px solid var(--line); }
   .compound-list li{
     display:grid; grid-template-columns: 8.5rem 1fr; gap:1.2rem;
     padding: 1.1rem 0; border-bottom:1px solid var(--line);
   }
-  .compound-list .label{ font-family: var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--amber); padding-top:0.15rem; }
+  .compound-list .label{ font-family: var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--moss); padding-top:0.15rem; }
   .compound-list .desc{ color: var(--forest-deep); }
   .compound-list .desc strong{ font-family: var(--font-display); font-weight:500; font-size:1.05rem; display:block; margin-bottom:0.2rem; }
 
@@ -158,7 +161,9 @@
     padding:1.6rem; position:relative;
   }
   .cred-card::before{
-    content:"◆"; color: var(--amber); font-size:0.7rem; position:absolute; top:1.4rem; right:1.4rem;
+    content:""; position:absolute; top:1.5rem; right:1.5rem;
+    width:12px; height:16px; background: var(--moss-soft);
+    clip-path: path('M6 0C6 0 12 5 12 10C12 13.3 9.3 16 6 16C2.7 16 0 13.3 0 10C0 5 6 0 6 0Z');
   }
   .cred-card .yr{ font-family: var(--font-mono); font-size:0.72rem; color: var(--forest); letter-spacing:0.08em; }
   .cred-card h3{ font-size:1.15rem; margin-top:0.6rem; line-height:1.35; }
@@ -172,8 +177,8 @@
   }
   .t-item{ position:relative; padding-bottom: 2.6rem; }
   .t-item:last-child{ padding-bottom:0; }
-  .t-leaf{ position:absolute; left:-2.6rem; top:0.15rem; width:15px; height:15px; }
-  .t-item .date{ font-family: var(--font-mono); font-size:0.75rem; letter-spacing:0.08em; color: var(--amber); }
+  .t-leaf{ position:absolute; left:-2.6rem; top:0.1rem; width:18px; height:18px; }
+  .t-item .date{ font-family: var(--font-mono); font-size:0.75rem; letter-spacing:0.08em; color: var(--moss); }
   .t-item h3{ font-size:1.3rem; margin-top:0.35rem; }
   .t-item .topic{ margin-top:0.35rem; color: var(--forest-deep); font-size:0.98rem; }
   .t-item .org{ font-family: var(--font-mono); font-size:0.78rem; color: var(--forest); margin-top:0.2rem; }
@@ -184,7 +189,7 @@
     display:grid; grid-template-columns: 6.5rem 1fr auto; gap:1.5rem; align-items:baseline;
     padding:1.5rem 0; border-bottom:1px solid var(--line);
   }
-  .write-item .type{ font-family: var(--font-mono); font-size:0.7rem; letter-spacing:0.08em; color: var(--lavender); text-transform:uppercase; }
+  .write-item .type{ font-family: var(--font-mono); font-size:0.7rem; letter-spacing:0.08em; color: var(--fern); text-transform:uppercase; }
   .write-item h3{ font-family: var(--font-display); font-style:italic; font-weight:500; font-size:1.15rem; }
   .write-item .meta{ font-family: var(--font-mono); font-size:0.78rem; color: var(--forest); white-space:nowrap; }
   @media (max-width:640px){
@@ -193,13 +198,13 @@
 
   /* ---------- contact ---------- */
   .contact{ background: var(--forest-deep); color: var(--white-soft); }
-  .contact .eyebrow{ color: var(--amber-soft); }
-  .contact .eyebrow::before{ background: var(--amber-soft); }
+  .contact .eyebrow{ color: var(--moss-soft); }
+  .contact .eyebrow::before{ color: var(--moss-soft); }
   .contact h2{ color: var(--white-soft); }
   .contact .wrap{ display:flex; flex-direction:column; align-items:flex-start; gap:1.6rem; }
   .contact p{ max-width:46ch; opacity:0.85; }
   .contact__row{ display:flex; flex-wrap:wrap; gap:1rem; }
-  .contact .btn--solid{ background: var(--amber); color: var(--forest-deep); }
+  .contact .btn--solid{ background: var(--moss-soft); color: var(--forest-deep); }
   .contact .btn--ghost{ border-color: var(--white-soft); color: var(--white-soft); }
   .contact .btn--ghost:hover{ background: var(--white-soft); color: var(--forest-deep); }
 
@@ -225,7 +230,8 @@
 
 <svg width="0" height="0" style="position:absolute">
   <symbol id="leaf-node" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="5.5" fill="var(--paper)" stroke="var(--amber)" stroke-width="1.4"/>
+    <path d="M12 2C6 6 4 12 12 22C20 12 18 6 12 2Z" fill="var(--moss-soft)" stroke="var(--moss)" stroke-width="1.3"/>
+    <path d="M12 6V19" stroke="var(--forest)" stroke-width="0.9" stroke-linecap="round"/>
   </symbol>
 </svg>
 
@@ -260,20 +266,20 @@
       </div>
     </div>
     <div class="hero__art">
-      <!-- 手繪風植物線稿，可自行替換為其他 SVG 或照片 -->
+      <!-- 植物葉片線稿，可自行替換為其他 SVG 或照片 -->
       <svg viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M160 400 C160 300 155 200 165 60" stroke="var(--forest)" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M165 340 C130 320 110 290 100 250" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
-        <path d="M165 340 C200 320 220 290 232 252" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
-        <path d="M162 260 C128 240 108 212 96 176" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
-        <path d="M162 260 C198 240 220 212 234 176" stroke="var(--forest)" stroke-width="1.2" fill="none"/>
-        <g fill="var(--amber-soft)" opacity="0.9">
-          <ellipse cx="165" cy="150" rx="7" ry="12" transform="rotate(20 165 150)"/>
-          <ellipse cx="178" cy="130" rx="7" ry="12" transform="rotate(20 178 130)"/>
-          <ellipse cx="152" cy="128" rx="7" ry="12" transform="rotate(-15 152 128)"/>
-          <ellipse cx="170" cy="105" rx="7" ry="12" transform="rotate(15 170 105)"/>
-          <ellipse cx="155" cy="100" rx="7" ry="12" transform="rotate(-20 155 100)"/>
-          <ellipse cx="165" cy="78" rx="7" ry="12" transform="rotate(5 165 78)"/>
+        <path d="M160 404C160 300 156 200 164 40" stroke="var(--forest)" stroke-width="1.8" stroke-linecap="round"/>
+        <g>
+          <path d="M162 360C120 348 92 322 78 288C110 288 142 306 162 340Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
+          <path d="M162 360C204 348 232 322 246 288C214 288 182 306 162 340Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
+          <path d="M160 296C120 284 94 260 80 228C112 228 142 246 160 278Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1.1"/>
+          <path d="M160 296C200 284 226 260 240 228C208 228 178 246 160 278Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1.1"/>
+          <path d="M158 236C124 224 100 202 88 174C116 174 144 190 158 218Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
+          <path d="M158 236C192 224 216 202 228 174C200 174 172 190 158 218Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1.1"/>
+          <path d="M156 176C130 166 112 148 102 124C126 124 148 138 156 162Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1"/>
+          <path d="M156 176C182 166 200 148 210 124C186 124 164 138 156 162Z" fill="var(--sage)" stroke="var(--forest)" stroke-width="1"/>
+          <path d="M162 118C144 108 132 92 128 72C146 76 160 90 165 108Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1"/>
+          <path d="M162 118C180 108 192 92 196 72C178 76 164 90 159 108Z" fill="var(--moss-soft)" stroke="var(--forest)" stroke-width="1"/>
         </g>
       </svg>
     </div>
@@ -283,7 +289,7 @@
 <section id="about" class="about reveal">
   <div class="wrap">
     <div>
-      <div class="about__portrait"><span>EDIT: 放入母親照片<br>建議 4:5 直式、自然光、暖色調</span></div>
+      <div class="about__portrait"><span>EDIT: 放入母親照片<br>建議 4:5 直式、自然光、暖綠色調環境（植栽、木質、亞麻）</span></div>
       <p class="about__quote">EDIT：放一句最能代表她教學理念的話，例如「氣味先於語言抵達，芳療是身體最誠實的對話。」</p>
     </div>
     <div class="about__intro">
