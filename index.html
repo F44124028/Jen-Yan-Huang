@@ -22,14 +22,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper: #EFF1E1;
-    --paper-alt: #E1E6CE;
+    --paper: #E7EFDF;
+    --paper-alt: #D9E4C7;
     --white-soft: #FAFBF3;
     --forest: #2E3B26;
     --forest-deep: #1B2416;
     --moss: #5B7A4A;
     --moss-soft: #A9C08C;
     --fern: #4F6B5C;
+    --ghost: #B9C8A2;
     --ink: #23261D;
     --sage: #96A87E;
     --line: rgba(35,38,29,0.14);
@@ -60,6 +61,14 @@
     font-weight: 400;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  body::after{
+    content:"";
+    position: fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.045; mix-blend-mode:multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
+    background-size: 160px 160px;
   }
   img{ max-width:100%; display:block; }
   a{ color:inherit; }
@@ -88,7 +97,7 @@
   /* ---------- nav ---------- */
   .nav{
     position: sticky; top:0; z-index: 50;
-    background: rgba(239,241,225,0.86);
+    background: rgba(231,239,223,0.86);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
   }
@@ -114,9 +123,24 @@
     .nav__toggle{ display:block; }
   }
 
-  /* ---------- hero ---------- */
-  .hero{ padding-top: clamp(3rem,7vw,5rem); position:relative; overflow:hidden; }
-  .hero .wrap{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem,5vw,4rem); align-items:center; }
+  /* ---------- hero (corner watercolor frame) ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    min-height: clamp(520px, 76vh, 700px);
+    display:flex; align-items:center;
+    padding: clamp(3rem,7vw,4rem) 0;
+  }
+  .hero__frame{ position:absolute; inset:0; pointer-events:none; z-index:0; }
+  .hero__branch{ position:absolute; width: clamp(200px, 30vw, 360px); height:auto; }
+  .hero__branch--tr{ top:-18px; right:-18px; }
+  .hero__branch--bl{ bottom:-18px; left:-18px; transform: rotate(180deg); }
+
+  .hero .wrap{ position:relative; z-index:2; width:100%; }
+  .hero__content{ position:relative; max-width: 620px; }
+  .hero__content::before{
+    content:""; position:absolute; inset:-26px -22px; z-index:-1;
+    background: radial-gradient(closest-side, rgba(231,239,223,0.62), transparent 72%);
+  }
   .hero__tagline{ font-family: var(--font-mono); font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss); }
   .hero h1{ font-size: clamp(2.6rem, 6vw, 4.3rem); line-height:1.08; margin-top:0.5rem; }
   .hero h1 em{ font-style: italic; color: var(--moss); font-weight:500; }
@@ -138,8 +162,10 @@
   .btn--ghost{ border:1px solid var(--forest-deep); color: var(--forest-deep); }
   .btn--ghost:hover{ background: var(--forest-deep); color: var(--white-soft); }
 
-  .hero__art{ position:relative; }
-  .hero__art svg{ width:100%; height:auto; overflow:visible; }
+  @media (max-width: 760px){
+    .hero{ min-height: unset; }
+    .hero__branch{ width: clamp(120px, 38vw, 180px); opacity:0.85; }
+  }
 
   /* ---------- about ---------- */
   .about .wrap{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2rem,5vw,4rem); align-items:start; }
@@ -159,6 +185,11 @@
   .compound-list .label{ font-family: var(--font-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--moss); padding-top:0.15rem; }
   .compound-list .desc{ color: var(--forest-deep); }
   .compound-list .desc strong{ font-family: var(--font-display); font-weight:500; font-size:1.05rem; display:block; margin-bottom:0.2rem; }
+
+  @media (max-width: 860px){
+    .about .wrap{ grid-template-columns: 1fr; }
+    .compound-list li{ grid-template-columns: 1fr; gap:0.3rem; }
+  }
 
   /* ---------- credentials ---------- */
   .cred-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap:1.2rem; }
@@ -213,12 +244,6 @@
   footer{ padding: 2rem 0; }
   footer .wrap{ display:flex; justify-content:space-between; align-items:center; font-family: var(--font-mono); font-size:0.72rem; color: var(--forest); flex-wrap:wrap; gap:0.6rem; }
 
-  @media (max-width: 860px){
-    .hero .wrap, .about .wrap{ grid-template-columns: 1fr; }
-    .hero__art{ order:-1; max-width:280px; margin:0 auto; }
-    .compound-list li{ grid-template-columns: 1fr; gap:0.3rem; }
-  }
-
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     .btn, .nav__links{ transition:none; }
@@ -265,8 +290,48 @@
 </nav>
 
 <section class="hero">
+  <div class="hero__frame" aria-hidden="true">
+    <svg class="hero__branch hero__branch--tr" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <path d="M290 6C244 30 258 78 200 108C150 134 158 176 90 200" stroke="var(--ghost)" stroke-width="1.4" fill="none" opacity="0.4"/>
+      <g opacity="0.3" style="color:var(--ghost)">
+        <g transform="translate(265,22) rotate(-15)"><use href="#wc-leaf" x="-35" y="-35" width="70" height="70"/></g>
+        <g transform="translate(222,66) rotate(38) scale(-1,1)"><use href="#wc-leaf" x="-35" y="-35" width="70" height="70"/></g>
+        <g transform="translate(182,112) rotate(-22)"><use href="#wc-leaf" x="-32" y="-32" width="64" height="64"/></g>
+        <g transform="translate(138,158) rotate(30) scale(-1,1)"><use href="#wc-leaf" x="-34" y="-34" width="68" height="68"/></g>
+        <g transform="translate(98,198) rotate(-14)"><use href="#wc-leaf" x="-30" y="-30" width="60" height="60"/></g>
+      </g>
+      <path d="M296 4C266 20 278 52 236 74C198 94 204 122 150 146" stroke="var(--forest)" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <g opacity="0.92">
+        <g transform="translate(286,14) rotate(-32)" style="color:var(--forest)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40"/></g>
+        <g transform="translate(252,46) rotate(42) scale(-1,1)" style="color:var(--moss)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40"/></g>
+        <g transform="translate(214,78) rotate(-36)" style="color:var(--fern)"><use href="#wc-leaf" x="-19" y="-19" width="38" height="38"/></g>
+        <g transform="translate(176,108) rotate(30) scale(-1,1)" style="color:var(--moss)"><use href="#wc-leaf" x="-19" y="-19" width="38" height="38"/></g>
+        <g transform="translate(144,136) rotate(-26) scale(0.9)" style="color:var(--sage)"><use href="#wc-leaf" x="-18" y="-18" width="36" height="36"/></g>
+        <g transform="translate(112,162) rotate(24) scale(-0.85,0.85)" style="color:var(--moss)"><use href="#wc-leaf" x="-17" y="-17" width="34" height="34"/></g>
+      </g>
+    </svg>
+    <svg class="hero__branch hero__branch--bl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <path d="M290 6C244 30 258 78 200 108C150 134 158 176 90 200" stroke="var(--ghost)" stroke-width="1.4" fill="none" opacity="0.4"/>
+      <g opacity="0.3" style="color:var(--ghost)">
+        <g transform="translate(265,22) rotate(-15)"><use href="#wc-leaf" x="-35" y="-35" width="70" height="70"/></g>
+        <g transform="translate(222,66) rotate(38) scale(-1,1)"><use href="#wc-leaf" x="-35" y="-35" width="70" height="70"/></g>
+        <g transform="translate(182,112) rotate(-22)"><use href="#wc-leaf" x="-32" y="-32" width="64" height="64"/></g>
+        <g transform="translate(138,158) rotate(30) scale(-1,1)"><use href="#wc-leaf" x="-34" y="-34" width="68" height="68"/></g>
+        <g transform="translate(98,198) rotate(-14)"><use href="#wc-leaf" x="-30" y="-30" width="60" height="60"/></g>
+      </g>
+      <path d="M296 4C266 20 278 52 236 74C198 94 204 122 150 146" stroke="var(--forest)" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <g opacity="0.92">
+        <g transform="translate(286,14) rotate(-32)" style="color:var(--forest)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40"/></g>
+        <g transform="translate(252,46) rotate(42) scale(-1,1)" style="color:var(--moss)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40"/></g>
+        <g transform="translate(214,78) rotate(-36)" style="color:var(--fern)"><use href="#wc-leaf" x="-19" y="-19" width="38" height="38"/></g>
+        <g transform="translate(176,108) rotate(30) scale(-1,1)" style="color:var(--moss)"><use href="#wc-leaf" x="-19" y="-19" width="38" height="38"/></g>
+        <g transform="translate(144,136) rotate(-26) scale(0.9)" style="color:var(--sage)"><use href="#wc-leaf" x="-18" y="-18" width="36" height="36"/></g>
+        <g transform="translate(112,162) rotate(24) scale(-0.85,0.85)" style="color:var(--moss)"><use href="#wc-leaf" x="-17" y="-17" width="34" height="34"/></g>
+      </g>
+    </svg>
+  </div>
   <div class="wrap">
-    <div>
+    <div class="hero__content">
       <div class="hero__tagline">EDIT: 芳香療法 · 身心保健 · 講師</div>
       <h1>EDIT: 姓名<br><em>用氣味，說一堂關於照顧自己的課</em></h1>
       <p class="hero__lede">EDIT：一句話講清楚妳母親是誰、做什麼、為誰服務。例如：「十年臨床芳療經驗，專注於壓力調節與睡眠保健，目前於多所機構開設芳療應用課程。」</p>
@@ -279,25 +344,6 @@
         <a class="btn btn--solid" href="#teaching">查看教學經歷</a>
         <a class="btn btn--ghost" href="#contact">邀約合作</a>
       </div>
-    </div>
-    <div class="hero__art">
-      <!-- 水彩暈染風格的植物枝葉，可自行替換為照片 -->
-      <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="205" cy="115" rx="95" ry="135" fill="var(--sage)" opacity="0.14" filter="url(#wc-wash)"/>
-        <ellipse cx="100" cy="305" rx="85" ry="115" fill="var(--moss)" opacity="0.11" filter="url(#wc-wash)"/>
-
-        <path d="M168 404C150 340 178 300 150 240C126 190 172 150 148 96C134 66 156 46 150 20"
-              stroke="var(--forest)" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.75"/>
-
-        <g transform="translate(150,370) rotate(-35) scale(1.35)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss)"/></g>
-        <g transform="translate(186,338) rotate(42) scale(-1.15,1.15)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--sage)"/></g>
-        <g transform="translate(126,296) rotate(-52) scale(1.2)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss-soft)"/></g>
-        <g transform="translate(179,251) rotate(36) scale(-1.05,1.05)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--fern)"/></g>
-        <g transform="translate(138,202) rotate(-40) scale(1.1)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--sage)"/></g>
-        <g transform="translate(173,158) rotate(30) scale(-0.95,0.95)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss)"/></g>
-        <g transform="translate(144,113) rotate(-46) scale(0.9)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--moss-soft)"/></g>
-        <g transform="translate(163,68) rotate(24) scale(-0.75,0.75)"><use href="#wc-leaf" x="-20" y="-20" width="40" height="40" style="color:var(--sage)"/></g>
-      </svg>
     </div>
   </div>
 </section>
